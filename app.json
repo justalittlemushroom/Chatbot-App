@@ -11,15 +11,15 @@
       "backgroundColor": "#3E3E3E"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.ChatbotApp"
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#3E3E3E"
       },
-      "edgeToEdgeEnabled": true
-    },
-    "web": {
+      "edgeToEdgeEnabled": true,
+      "softwareKeyboardLayoutMode": "pan"
     }
   }
 }

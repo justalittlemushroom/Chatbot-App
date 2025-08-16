@@ -11,7 +11,7 @@ const colors = {
 }
 
 export const styles = StyleSheet.create({
-  container: {
+  auth_container: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
     backgroundColor: colors.background,
@@ -20,7 +20,55 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 16,
     flexDirection: 'column',
-    fontFamily: 'SortsMillGaudy',
+  },
+  main_container: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+    backgroundColor: colors.background,
+    paddingHorizontal: 36,
+    paddingVertical: 32,
+    color: colors.text,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    gap: 16,
+    flexDirection: 'column',
+  },
+  scroll_container: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: colors.background,
+    padding: 0,
+    gap: 12,
+    flexDirection: 'column',
+  },
+  preview_container: {
+    width: '100%',
+    backgroundColor: colors.background,
+    paddingTop: 8,
+    paddingBottom: 16,
+    color: colors.text,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    gap: 2,
+    flexDirection: 'column',
+  },
+  bottom_container: {
+    width: '100%',
+    height: 48,
+    paddingHorizontal: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  reply_container: {
+    width: '100%',
+    height: 48,
+    paddingHorizontal: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    backgroundColor: colors.button,
+    borderRadius: 20,
   },
   h1: {
     fontFamily: 'KaiseiHarunoUmi',
@@ -34,6 +82,25 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.text,
     lineHeight: 23,
+  },
+  user_text: {
+    fontFamily: 'SortsMillGoudy',
+    fontSize: 14,
+    color: colors.text,
+    lineHeight: 20,
+    backgroundColor: colors.text_input,
+    paddingHorizontal: 4,
+    paddingTop: 4,
+    paddingBottom: 4,
+  },
+  ai_text: {
+    fontFamily: 'SortsMillGoudy',
+    fontSize: 14,
+    color: colors.text,
+    lineHeight: 20,
+    paddingHorizontal: 4,
+    paddingTop: 6,
+    paddingBottom: 4,
   },
   subtext: {
     fontFamily: 'Raleway',
@@ -115,5 +182,19 @@ export const styles = StyleSheet.create({
     color: colors.text,
     lineHeight: 19,
     textAlign: 'center',
+  },
+  new_chat_icon: {
+    color: colors.icon,
+  },
+  send_icon: {
+    color: colors.icon,
+  },
+  chat_input: {
+    width: '100%',
+    fontFamily: 'Raleway',
+    fontSize: 16,
+    color: colors.text,
+    lineHeight: 19,
+    backgroundColor: colors.button,
   },
 })

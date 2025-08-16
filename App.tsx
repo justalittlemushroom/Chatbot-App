@@ -1,10 +1,7 @@
-import { View } from 'react-native';
-import { styles } from './src/styles/styles';
-import LoginScreen from './src/screens/LoginScreen';
-import SignUpScreen from './src/screens/SignUpScreen';
+import AppNavigator from "./src/navigation/AppNavigator";
 
 export default function App() {
   return (
-      <SignUpScreen />
+      <AppNavigator />
   );
 }
