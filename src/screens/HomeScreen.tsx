@@ -5,6 +5,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../navigation/AppNavigator';
 import ConversationPreview from '../components/ConversationPreview';
 import { Ionicons } from '@expo/vector-icons';
+import Profile from '../components/Profile';
 
 type AuthScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -13,7 +14,10 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.main_container}>
-      <Text style={styles.h1}>All Chats</Text>
+      <View style={styles.top_container}>
+        <Text style={styles.h1}>All Chats</Text>
+        <Profile />
+      </View>
       <ScrollView style={styles.scroll_container} showsVerticalScrollIndicator={false}>
         <ConversationPreview />
         <ConversationPreview />

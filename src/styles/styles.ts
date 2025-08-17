@@ -7,7 +7,8 @@ const colors = {
     subtext: '#3C6DFF',
     icon: '#3E84FE',
     third_party_auth: '#88B2F9',
-    button: '#B1CCFA'
+    button: '#B1CCFA',
+    sign_out: '#FF4646',
 }
 
 export const styles = StyleSheet.create({
@@ -20,6 +21,14 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 16,
     flexDirection: 'column',
+  },
+  auth_buttons_container_vertical: {
+    flexDirection: 'column',
+    gap: 40,
+  },
+  auth_buttons_container_horizontal: {
+    flexDirection: 'row',
+    gap: 40,
   },
   main_container: {
     width: Dimensions.get('window').width,
@@ -40,6 +49,23 @@ export const styles = StyleSheet.create({
     padding: 0,
     gap: 12,
     flexDirection: 'column',
+  },
+  top_container: {
+    width: '100%',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+  profile_settings_container: {
+    width: 100,
+    paddingTop: 20,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  profile_container: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 4,
   },
   preview_container: {
     width: '100%',
@@ -74,6 +100,7 @@ export const styles = StyleSheet.create({
     fontFamily: 'KaiseiHarunoUmi',
     fontSize: 24,
     color: colors.text,
+    paddingTop: 24,
     lineHeight: 35,
     textAlign: 'center',
   },
@@ -142,11 +169,10 @@ export const styles = StyleSheet.create({
   password: {
     width: Dimensions.get('window').width - 72,
     gap: 2,
-
   },
   auth_button: {
-    width: 80,
     height: 28,
+    paddingHorizontal: 16,
     margin: 16,
     borderRadius: 8, 
     backgroundColor: colors.button, 
@@ -159,10 +185,6 @@ export const styles = StyleSheet.create({
     color: colors.text,
     lineHeight: 19,
     textAlign: 'center',
-  },
-  login_signup: {
-    flexDirection: 'row',
-    gap: 40,
   },
   third_party_auth: {
     paddingVertical: 36,
@@ -196,5 +218,11 @@ export const styles = StyleSheet.create({
     color: colors.text,
     lineHeight: 19,
     backgroundColor: colors.button,
+  },
+  profile_icon: {
+    color: colors.text,
+  },
+  log_out_icon: {
+    color: colors.sign_out,
   },
 })
