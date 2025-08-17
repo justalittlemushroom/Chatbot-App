@@ -20,16 +20,6 @@ export const signInWithEmail = async (email: string, password: string) => {
   }
 }
 
-export const signInWithGoogle = async () => {
-  try {
-    const provider = new GoogleAuthProvider();
-    const userCredential = await signInWithPopup(auth, provider);
-    return userCredential.user;
-  } catch (error) {
-    throw error;
-  }
-}
-
 export const getUser = () => {
   return auth.currentUser;
 }

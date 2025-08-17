@@ -16,9 +16,9 @@ export default function ResetPasswordScreen() {
   const handleResetPassword = async () => {
     try {
       await resetPassword(email)
-      alert('Email successfully sent!')
+      alert('Email Successfully Sent!')
     } catch (error: any) {
-      alert("Invalid email");
+      alert("Invalid Email");
     }
   }
 

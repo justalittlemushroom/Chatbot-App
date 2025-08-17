@@ -24,10 +24,10 @@ export const Profile: React.FC = () => {
   const handleLogOut = () => {
     try {
       logOut();
-      alert("Successfully logged out!")
+      alert("Successfully Logged Out!")
       navigation.navigate('Login')
     } catch (error: any) {
-      alert("Failed to log out")
+      alert("Failed to Log Out")
     }
   }
 

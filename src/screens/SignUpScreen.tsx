@@ -20,14 +20,14 @@ export default function SignUpScreen() {
   const handleSignUp = async () => {
     try {
       if (password !== confirmPassword) {
-        alert("Passwords do not match");
+        alert("Passwords Do Not Match");
         setConfirmPassword('');
         return;
       }
       await signUpWithEmail(username, email, password);
       navigation.navigate('Home');
     } catch (error: any) {
-      alert("Invalid email or password");
+      alert("Invalid Email/Password");
       setPassword('')
     }
   }
@@ -43,7 +43,7 @@ export default function SignUpScreen() {
         <TouchableOpacity style={styles.auth_button} onPress={() => handleSignUp()}><Text style={styles.auth_button_text}>Sign Up</Text></TouchableOpacity>
         <TouchableOpacity style={styles.auth_button} onPress={() => navigation.navigate('Login')}><Text style={styles.auth_button_text}>Return to Login</Text></TouchableOpacity>
       </View>
-      <ThirdPartyAuth />
+      {/* <ThirdPartyAuth /> */}
     </View>
   );
 }

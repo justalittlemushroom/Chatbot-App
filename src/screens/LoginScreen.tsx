@@ -20,7 +20,7 @@ export default function LoginScreen() {
       await signInWithEmail(email, password);
       navigation.navigate('Home')
     } catch (error: any) {
-      alert("Invalid email or password");
+      alert("Invalid Email/Password");
       setPassword('')
     }
   }
@@ -37,7 +37,7 @@ export default function LoginScreen() {
         <TouchableOpacity style={styles.auth_button}  onPress={() => handleLogin()}><Text style={styles.auth_button_text}>Login</Text></TouchableOpacity>
         <TouchableOpacity style={styles.auth_button} onPress={() => navigation.navigate('SignUp')}><Text style={styles.auth_button_text}>Sign Up</Text></TouchableOpacity>
       </View>
-      <ThirdPartyAuth />
+      {/* <ThirdPartyAuth /> */}
     </View>
   );
 }
