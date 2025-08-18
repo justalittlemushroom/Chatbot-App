@@ -6,9 +6,11 @@ const colors = {
     text_input: '#CCD8EB',
     subtext: '#3C6DFF',
     icon: '#3E84FE',
+    disabled_icon: '#707070ff',
     third_party_auth: '#88B2F9',
     button: '#B1CCFA',
     sign_out: '#FF4646',
+    shadow: '#000000',
 }
 
 export const styles = StyleSheet.create({
@@ -42,14 +44,6 @@ export const styles = StyleSheet.create({
     gap: 16,
     flexDirection: 'column',
   },
-  scroll_container: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: colors.background,
-    padding: 0,
-    gap: 12,
-    flexDirection: 'column',
-  },
   top_container: {
     width: '100%',
     justifyContent: 'space-between',
@@ -66,6 +60,14 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     gap: 4,
+  },
+  scroll_container: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: colors.background,
+    padding: 0,
+    gap: 12,
+    flexDirection: 'column',
   },
   preview_container: {
     width: '100%',
@@ -211,6 +213,9 @@ export const styles = StyleSheet.create({
   send_icon: {
     color: colors.icon,
   },
+  send_icon_disabled: {
+    color: colors.disabled_icon,
+  },
   chat_input: {
     width: '100%',
     fontFamily: 'Raleway',
@@ -225,4 +230,23 @@ export const styles = StyleSheet.create({
   log_out_icon: {
     color: colors.sign_out,
   },
+  message_menu: {
+    width: 100,
+    height: 56,
+    padding: 8,
+    backgroundColor: colors.button,
+    gap: 8,
+    borderRadius: 8,
+    elevation: 8, 
+    shadowColor: colors.shadow,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+  },
+  menu_options_text: {
+    fontFamily: 'SortsMillGoudy',
+    fontSize: 14,
+    color: colors.text,
+    lineHeight: 20,
+  }
 })

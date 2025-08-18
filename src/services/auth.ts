@@ -21,7 +21,11 @@ export const signInWithEmail = async (email: string, password: string) => {
 }
 
 export const getUser = () => {
-  return auth.currentUser;
+  try {
+    return auth.currentUser;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export const resetPassword = async (email: string) => {

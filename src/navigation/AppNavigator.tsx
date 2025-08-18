@@ -12,7 +12,7 @@ export type RootStackParamList = {
   SignUp: undefined;
   ResetPassword: undefined;
   Home: undefined;
-  Chat: undefined;
+  Chat: { conversationId: string };
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
