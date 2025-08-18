@@ -6,9 +6,9 @@ export const MessageMenu: React.FC<{
   position: { x: number; y: number };
   message: any;
   onClose: () => void;
-  onDelete: (messageId: string) => void;
   onCopy: (content: string) => void;
-}> = ({ visible, position, message, onClose, onDelete, onCopy }) => {
+  onDelete: (messageId: string) => void;
+}> = ({ visible, position, message, onClose, onCopy, onDelete }) => {
   
   if (!visible) return null;
   

@@ -1,5 +1,4 @@
-import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import { styles } from '../styles/styles';
 interface ConversationPreviewProps {
   conversation: {
@@ -8,9 +7,10 @@ interface ConversationPreviewProps {
     updatedAt: any;
   };
   onPress: (conversationId: string) => void;
+  onLongPress: (conversation: any, event: any) => void;
 }
 
-export const ConversationPreview: React.FC<ConversationPreviewProps> = ({conversation, onPress}) => {
+export const ConversationPreview: React.FC<ConversationPreviewProps> = ({conversation, onPress, onLongPress}) => {
   const formatTimestamp = (timestamp: any) => {
     if (!timestamp) return 'Just Now';
     
@@ -33,7 +33,7 @@ export const ConversationPreview: React.FC<ConversationPreviewProps> = ({convers
   };
 
   return (
-    <TouchableOpacity style={styles.preview_container} onPress={() => onPress(conversation.id)}>
+    <TouchableOpacity style={styles.preview_container} onPress={() => onPress(conversation.id)} onLongPress={(event) => onLongPress(conversation, event)}>
       <Text style={styles.h2}>{conversation.title}</Text>
       <Text style={styles.subtext}>
         Last Updated {formatTimestamp(conversation.updatedAt)}

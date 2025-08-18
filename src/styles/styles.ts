@@ -98,6 +98,29 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.button,
     borderRadius: 20,
   },
+  modal_overlay: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+    backgroundColor: colors.background,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modal_container: {
+    width: 240,
+    flexDirection: 'column',
+    gap: 4,
+    backgroundColor: colors.button,
+    borderRadius: 8,
+    marginBottom: 24,
+  },
+  modal_buttons_container: {
+    flexDirection: 'row',
+    gap: 4,
+    justifyContent: 'space-around',
+    backgroundColor: colors.button,
+    borderRadius: 8,
+    paddingBottom: 4,
+  },
   h1: {
     fontFamily: 'KaiseiHarunoUmi',
     fontSize: 24,
@@ -248,5 +271,21 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.text,
     lineHeight: 20,
+  },
+  modal_text: {
+    fontFamily: 'Raleway',
+    fontSize: 16,
+    color: colors.text,
+    lineHeight: 19,
+    backgroundColor: colors.text_input,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+  },
+  modal_buttons_text: {
+    fontFamily: 'Raleway',
+    fontSize: 16,
+    color: colors.text,
+    lineHeight: 19,
+    textAlign: 'center',
   }
 })

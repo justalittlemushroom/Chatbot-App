@@ -5,7 +5,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../navigation/AppNavigator';
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
-import { listenToMessages, loadMessages, saveMessage, deleteMessage } from '../services/conversations';
+import { listenToMessages, saveMessage, deleteMessage, getConversation } from '../services/conversations';
 import Profile from '../components/Profile';
 import MessageMenu from '../components/MessageMenu';
 import * as Clipboard from 'expo-clipboard';
@@ -17,6 +17,8 @@ type AuthScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Chat'>;
 export default function ChatScreen({ route }: any) {
   const navigation = useNavigation<AuthScreenNavigationProp>();
 
+  const [conversationTitle, setConversationTitle] = useState('New Conversation');
+
   const [messages, setMessages] = useState<any[]>([]);
   const [inputText, setInputText] = useState('');
   const [loading, setLoading] = useState(false);
@@ -27,26 +29,22 @@ export default function ChatScreen({ route }: any) {
   const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    const loadAndListenToMessages = async () => {
-      try {
-        const existingMessages = await loadMessages(conversationId);
-        setMessages(existingMessages);
-        
-        const unsubscribe = listenToMessages(conversationId, (updatedMessages) => {
-          setMessages(updatedMessages);
-        });
-        
-        return () => {
-          unsubscribe();
-        };
-        
-      } catch (error) {
-        console.error('Error Loading Messages:', error);
-        alert("Messages Failed to Load");
-      }
-    };
-  
-  loadAndListenToMessages();
+      const getConversationName = async () => {
+        try {
+          const conversation = await getConversation(conversationId) as any;
+          setConversationTitle(conversation.title);
+          
+        } catch (error) {
+          console.error('Error Loading Conversation Name:', error);
+          setConversationTitle('New Conversation');
+        }
+      };
+      
+    getConversationName();
+      
+    const unsubscribe = listenToMessages(conversationId, setMessages);
+
+    return () => unsubscribe();
   }, [conversationId]);
 
   const handleUserReply = async () => {
@@ -68,7 +66,7 @@ export default function ChatScreen({ route }: any) {
     }
   }
 
-  const handleMessagePress = (message: any, event: any) => {
+  const handleMessageLongPress = (message: any, event: any) => {
     const { pageX, pageY } = event.nativeEvent;
 
     const menuWidth = 100;
@@ -85,39 +83,39 @@ export default function ChatScreen({ route }: any) {
     setShowMenu(true);
   };
 
+  const handleCopyMessage = async (content: string) => {
+    try {
+      setShowMenu(false);
+      await Clipboard.setStringAsync(content);
+      alert("Copied!")
+    } catch (error) {
+      console.error('Copying Failed:', error);
+      alert("Error Copying");
+    }
+  };
+
   const handleDeleteMessage = async (messageId: string) => {
     try {
       setShowMenu(false);
       await deleteMessage(conversationId, messageId);
     } catch(error: any) {
-      console.error('Delete Failed:', error);
+      console.error('Error Deleting Message:', error);
       alert("Failed to Delete Message");
     }
   }
 
-  const handleCopyMessage = async (content: string) => {
-  try {
-    setShowMenu(false);
-    await Clipboard.setStringAsync(content);
-    alert("Copied!")
-  } catch (error) {
-    console.error('Copying Failed:', error);
-    alert("Error Copying");
-  }
-};
-
-
   return (
     <View style={styles.main_container}>
       <View style={styles.top_container}>
-        <Text style={styles.h1}>Conversation Title</Text>
+        <Text style={styles.h1} onPress={() => navigation.navigate('Home')}>{conversationTitle}</Text>
         <Profile />
       </View>
       <ScrollView style={styles.scroll_container} showsVerticalScrollIndicator={false}>
         {messages.map(message => (
           <TouchableOpacity
             key={message.id}
-            onPress={(event) => handleMessagePress(message, event)}
+            onPress={() => setShowMenu(false)}
+            onLongPress={(event) => handleMessageLongPress(message, event)}
             activeOpacity={0.7}
           >
             <Text style={message.role === 'user' ? styles.user_text : styles.ai_text}>
@@ -130,8 +128,8 @@ export default function ChatScreen({ route }: any) {
           position={menuPosition}
           message={selectedMessage}
           onClose={() => setShowMenu(false)}
-          onDelete={handleDeleteMessage}
           onCopy={handleCopyMessage}
+          onDelete={handleDeleteMessage}
         />
       </ScrollView>
       <View style={styles.reply_container}>
