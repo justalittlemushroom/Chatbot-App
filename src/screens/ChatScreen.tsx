@@ -23,6 +23,7 @@ export default function ChatScreen({ route }: any) {
   const [inputText, setInputText] = useState('');
   const [loading, setLoading] = useState(false);
   const { conversationId } = (route.params as { conversationId: string });
+  const [aiTyping, setAiTyping] = useState(false);
 
   const [showMenu, setShowMenu] = useState(false);
   const [selectedMessage, setSelectedMessage] = useState(null);
@@ -52,19 +53,43 @@ export default function ChatScreen({ route }: any) {
 
     try {
       setLoading(true);
+      setAiTyping(true);
     
       await saveMessage(conversationId, inputText.trim(), 'user');
       
+      const userMessage = inputText.trim();
       setInputText('');
+
+      const conversationContext = messages.map(msg => 
+        `${msg.role === 'user' ? 'User' : 'AI'}: ${msg.content}`
+      ).join('\n');
       
-      // 3. TODO: Get AI response and save it
+      const fullContext = conversationContext + `\nUser: ${userMessage}`;
+      
+      const AI_SERVER_URL = process.env.EXPO_PUBLIC_AI_SERVER_URL || 'http://localhost:3001';
+
+      const response = await fetch(`${AI_SERVER_URL}/chat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          message: fullContext
+        })
+      });
+
+      const aiData = await response.json();
+      
+      if (aiData.response) {
+        await saveMessage(conversationId, aiData.response, 'ai');
+      }
+
+      setAiTyping(false);
     } catch (error) {
       console.error('Error Sending Message:', error);
       alert("Message Failed to Send!");
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   const handleMessageLongPress = (message: any, event: any) => {
     const { pageX, pageY } = event.nativeEvent;
@@ -123,6 +148,7 @@ export default function ChatScreen({ route }: any) {
             </Text>
           </TouchableOpacity>
         ))}
+        {aiTyping && (<Text style={styles.ai_text}>AI is Thinking...</Text>)}
         <MessageMenu 
           visible={showMenu}
           position={menuPosition}
@@ -133,8 +159,8 @@ export default function ChatScreen({ route }: any) {
         />
       </ScrollView>
       <View style={styles.reply_container}>
-        <TextInput placeholder="Reply..." style={styles.chat_input}  value={inputText} onChangeText={setInputText} multiline onSubmitEditing={handleUserReply}/>
-        <TouchableOpacity onPress={() => handleUserReply()} disabled={loading || !inputText.trim()}><Ionicons name="arrow-up-circle-outline" size={32} style={[styles.send_icon, (loading || !inputText.trim()) && styles.send_icon_disabled]} /></TouchableOpacity>
+        <TextInput placeholder="Reply..." style={styles.chat_input}  value={inputText} onChangeText={setInputText} multiline onSubmitEditing={loading || aiTyping ? undefined : handleUserReply} editable={!loading && !aiTyping}/>
+        <TouchableOpacity onPress={() => handleUserReply()} disabled={loading || !inputText.trim() || aiTyping}><Ionicons name="arrow-up-circle-outline" size={32} style={[styles.send_icon, (loading || !inputText.trim()) && styles.send_icon_disabled]} /></TouchableOpacity>
       </View>
     </View>
   );
