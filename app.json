@@ -20,6 +20,9 @@
       },
       "edgeToEdgeEnabled": true,
       "softwareKeyboardLayoutMode": "pan"
-    }
+    },
+    "plugins": [
+      "expo-font"
+    ]
   }
 }
