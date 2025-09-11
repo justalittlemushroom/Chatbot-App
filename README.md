@@ -96,8 +96,7 @@ python phi2_server.py
 npx expo start
 ```
 
-![image0](https://github.com/user-attachments/assets/a6059302-4088-40fa-aa6f-67bd923c5c7b)
-![image1](https://github.com/user-attachments/assets/421d9c41-1317-465b-ba14-c0fb875fe1d4)
+<img src="https://github.com/user-attachments/assets/a6059302-4088-40fa-aa6f-67bd923c5c7b" width="250" alt="App Screenshot"> <img src="https://github.com/user-attachments/assets/421d9c41-1317-465b-ba14-c0fb875fe1d4" width="250" alt="App Screenshot">
 
 
 ---
